@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>3dove AI-Powered Linux & Git Training</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             margin: 0;
@@ -13,14 +16,17 @@
         
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
         body {
-            font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a2472 0%, #0e6cff 100%);
+            font-family: 'Poppins', 'Montserrat', 'Segoe UI', sans-serif;
+            background: #0f172a; /* Dark blue background matching 3dove.cloud */
             color: white;
             overflow: hidden;
-            font-weight: 600;
+            font-weight: 400;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            letter-spacing: 0.3px;
         }
         
         .slideshow-container {
@@ -34,8 +40,81 @@
             width: 100%;
             height: 100vh;
             position: relative;
-            background: #0e6cff;
+            background: #0f172a; /* Dark blue background matching 3dove.cloud */
+            background-image: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 100%);
             animation: slideIn 0.8s ease-in-out;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: soft-light;
+        }
+        
+        /* Slide-specific backgrounds */
+        .slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1639322537504-6427a16b0a28?q=80&w=1932&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1769&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(5) {
+            background-image: url('https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=1974&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(6) {
+            background-image: url('https://images.unsplash.com/photo-1607706189992-eae578626c86?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(7) {
+            background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(8) {
+            background-image: url('https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(9) {
+            background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(10) {
+            background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(11) {
+            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
+        }
+        
+        .slide:nth-child(12) {
+            background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1770&auto=format&fit=crop');
+            background-color: rgba(2, 6, 23, 0.5);
+            background-blend-mode: luminosity;
         }
         
         .slide.active {
@@ -47,6 +126,19 @@
             padding: 40px 60px;
             overflow-y: auto;
             max-height: 100vh;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.4);
+            z-index: 1;
         }
         
         @media (max-width: 768px) {
@@ -60,9 +152,19 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.08); }
         }
         
         @keyframes float {
@@ -74,24 +176,34 @@
             font-size: 3.8em;
             font-weight: bold;
             margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
             animation: float 3s ease-in-out infinite;
             letter-spacing: -0.5px;
             max-width: 95%;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .slide:first-child h1 {
+            font-size: 3.2em;
+            margin-bottom: 10px;
         }
         
         .slide h2 {
             font-size: 3.2em;
             font-weight: bold;
             margin-bottom: 20px;
-            color: white;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            color: white; /* Keeping titles white */
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 3;
         }
         
         .slide h3 {
             font-size: 2.2em;
             margin-bottom: 12px;
-            color: #ffd700;
+            color: #ffd700; /* Gold color */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
         
         .slide p {
@@ -99,44 +211,95 @@
             margin-bottom: 18px;
             line-height: 1.6;
             max-width: 90%;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
             letter-spacing: 0.2px;
             font-weight: 600;
+            position: relative;
+            z-index: 3;
+            border-left: 3px solid rgba(255, 215, 0, 0.3);
+            padding-left: 15px;
+            margin-left: 15px;
         }
         
         @media (max-width: 768px) {
             .slide h1 {
-                font-size: 2.5em;
-            }
-            
-            .slide h2 {
                 font-size: 2.2em;
             }
             
+            .slide h2 {
+                font-size: 2em;
+            }
+            
             .slide h3 {
-                font-size: 1.8em;
+                font-size: 1.6em;
             }
             
             .slide p {
-                font-size: 1.4em;
+                font-size: 1.2em;
                 max-width: 100%;
+                padding-left: 10px;
+                margin-left: 5px;
+            }
+            
+            .stats {
+                font-size: 5em !important;
+            }
+            
+            .icon-large {
+                font-size: 3em;
+                margin: 10px;
+            }
+            
+            .vs-text {
+                font-size: 2em;
+            }
+            
+            .contact-info {
+                font-size: 1.2em;
+                padding: 15px;
             }
         }
         
         .highlight {
-            color: #ffd700;
+            color: #ffd700; /* Gold color */
             font-weight: bold;
-            animation: pulse 2s infinite;
+            position: relative;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(to right, #ffd700, #f5a623);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 2s infinite;
+            background-size: 200% 100%;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
         }
         
         .stats {
-            font-size: 4em;
-            font-weight: bold;
+            font-size: 7.5em;
+            font-weight: 800;
             color: #ef4444;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-            margin: 20px 0;
+            text-shadow: 3px 3px 15px rgba(239, 68, 68, 0.5);
+            margin: 30px 0;
             animation: pulse 1.5s infinite;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .stats::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 10px;
+            background: rgba(239, 68, 68, 0.3);
+            bottom: -10px;
+            left: -10%;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
         }
         
         .logo {
@@ -173,19 +336,66 @@
         @media (max-width: 480px) {
             .career-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .slide h1 {
+                font-size: 1.8em;
+            }
+            
+            .slide h2 {
+                font-size: 1.6em;
+            }
+            
+            .slide p {
+                font-size: 1.1em;
+                border-left: 2px solid rgba(255, 215, 0, 0.3);
+                padding-left: 8px;
+                margin-left: 3px;
+            }
+            
+            .stats {
+                font-size: 4em !important;
+                margin: 15px 0;
+            }
+            
+            .slide-counter {
+                top: 15px;
+                right: 15px;
+                padding: 5px 10px;
+                font-size: 0.9em;
             }
         }
         
         .career-card {
-            background: black;
-            border: 3px solid #ffd700;
-            border-radius: 15px;
+            background: rgba(15, 23, 42, 0.8); /* Dark blue matching 3dove.cloud */
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+            border-radius: 8px; /* Sharper corners like 3dove.cloud */
             padding: 25px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             animation: float 3s ease-in-out infinite;
             font-size: 1.2em;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 15px rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+        }
+        
+        .career-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                rgba(255, 215, 0, 0.1),
+                transparent,
+                transparent
+            );
+            transform: rotate(30deg);
+            pointer-events: none;
         }
         
         .career-card:nth-child(2) { animation-delay: 0.5s; }
@@ -195,8 +405,10 @@
         .career-card:nth-child(6) { animation-delay: 2.5s; }
         
         .career-card:hover {
-            transform: scale(1.05);
-            background: rgba(251, 191, 36, 0.2);
+            transform: translateY(-5px);
+            background: rgba(15, 23, 42, 0.9);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px rgba(255, 215, 0, 0.3);
         }
         
         .program-features {
@@ -215,12 +427,35 @@
         }
         
         .feature-box {
-            background: black;
-            border-radius: 20px;
-            padding: 20px;
+            background: rgba(15, 23, 42, 0.8); /* Dark blue matching 3dove.cloud */
+            border-radius: 8px; /* Sharper corners like 3dove.cloud */
+            padding: 25px;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(251, 191, 36, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 215, 0, 0.1);
+            position: relative;
+            z-index: 3;
             animation: float 4s ease-in-out infinite;
+            overflow: hidden;
+        }
+        
+        .feature-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+            pointer-events: none;
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
         }
         
         .feature-box:nth-child(2) { animation-delay: 1s; }
@@ -253,16 +488,17 @@
         .timeline-circle {
             width: 80px;
             height: 80px;
-            background: #fbbf24;
+            background: linear-gradient(45deg, #ffd700, #f5a623);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2em;
             font-weight: bold;
-            color: #1e3a8a;
+            color: #0f172a;
             margin-bottom: 15px;
             animation: pulse 2s infinite;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
         
         .timeline-line {
@@ -271,88 +507,117 @@
             left: 80px;
             width: 200px;
             height: 4px;
-            background: #fbbf24;
+            background: linear-gradient(90deg, #ffd700, #f5a623);
             z-index: -1;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
         
         .pricing-box {
-            background: linear-gradient(45deg, #fbbf24, #f59e0b);
-            color: #1e3a8a;
+            background: #0284c7; /* Blue background from 3dove.cloud */
+            color: white;
             padding: 40px;
-            border-radius: 25px;
+            border-radius: 8px; /* Sharper corners like 3dove.cloud */
             font-size: 1.5em;
             font-weight: bold;
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             margin: 30px 0;
-            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        
+        .pricing-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            pointer-events: none;
+            animation: shine 4s infinite;
+            animation-delay: 1s;
         }
         
         .contact-info {
-            background: black;
+            background: rgba(15, 23, 42, 0.8); /* Dark blue matching 3dove.cloud */
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 8px; /* Sharper corners like 3dove.cloud */
             margin: 30px 0;
             font-size: 1.6em;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 15px rgba(255, 215, 0, 0.2);
+            position: relative;
+            z-index: 3;
         }
         
         .navigation {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             z-index: 1000;
+            flex-direction: column;
+            align-items: flex-end;
         }
         
         .nav-btn {
-            padding: 12px 20px;
-            background: rgba(255, 215, 0, 0.9);
-            color: #0a2472;
+            padding: 8px 15px;
+            background: linear-gradient(45deg, #ffd700, #f5a623);
+            color: #0f172a;
             border: none;
-            border-radius: 30px;
+            border-radius: 6px; /* Sharper corners like 3dove.cloud */
             cursor: pointer;
-            font-weight: bold;
-            font-size: 1em;
+            font-weight: 600;
+            font-size: 0.8em;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 0 10px rgba(255, 215, 0, 0.2);
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        
+        .nav-btn:hover {
+            opacity: 1;
         }
         
         @media (max-width: 768px) {
             .navigation {
-                bottom: 15px;
-                right: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-                width: 100%;
-                padding: 0 15px;
-                box-sizing: border-box;
+                bottom: 10px;
+                right: 10px;
                 gap: 5px;
             }
             
             .nav-btn {
-                padding: 10px 15px;
-                font-size: 0.9em;
+                padding: 6px 12px;
+                font-size: 0.7em;
             }
         }
         
         .nav-btn:hover {
-            background: #fbbf24;
-            transform: scale(1.1);
+            background: linear-gradient(45deg, #f5a623, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15), 0 0 15px rgba(255, 215, 0, 0.3);
         }
         
         .slide-counter {
             position: fixed;
             top: 30px;
             right: 30px;
-            background: rgba(0,0,0,0.5);
-            padding: 10px 20px;
-            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.7); /* Dark blue matching 3dove.cloud */
+            padding: 8px 16px;
+            border-radius: 6px; /* Sharper corners like 3dove.cloud */
             backdrop-filter: blur(10px);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+            color: #ffd700; /* Gold text */
         }
         
         .background-pattern {
@@ -362,16 +627,17 @@
             width: 100%;
             height: 100%;
             opacity: 0.1;
-            background-image: 
-                radial-gradient(circle at 25% 25%, #fbbf24 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, #fbbf24 2px, transparent 2px);
-            background-size: 50px 50px;
-            animation: float 6s ease-in-out infinite;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAg IDxwYXRoIGQ9Ik0xMCAxMGMwLTIuMjEuOS00LjIgMi4zNS01LjY2QTguMDIgOC4wMiAwIDAgMSAxOCA0YTggOCAwIDAgMSA4IDh2NGE0IDQgMCAwIDEgNCA0IDQgNCAwIDAgMSA0LTR2LTRhOCA4IDAgMCAxIDgtOCA4LjAyIDguMDIgMCAwIDEgNS42NiAyLjM0QTcuOTggNy45OCAwIDAgMSA1MCAxMHY0YTQgNCAwIDAgMSA0IDR2MjBhNCA0IDAgMCAxLTQgNGgtNDB2LTI0YTQgNCAwIDAgMSA0LTR2LTRhOCA4IDAgMCAxLTgtOHoiIGZpbGw9IiNmZmQ3MDAiIGZpbGwtb3BhY2l0eT0iMC4xIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+');
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: screen;
         }
         
         .ai-icon {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 20px;
+            color: #38bdf8; /* Light blue accent color from 3dove.cloud */
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
             animation: pulse 2s infinite;
         }
         
@@ -406,18 +672,40 @@
         }
         
         .metric-card {
-            background: black;
-            border: 2px solid #10b981;
-            border-radius: 15px;
-            padding: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            padding: 25px;
             text-align: center;
             animation: float 3s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 15px rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            z-index: 3;
+        }
+        
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                rgba(16, 185, 129, 0.05),
+                transparent,
+                transparent
+            );
+            transform: rotate(30deg);
+            pointer-events: none;
         }
         
         .metric-number {
             font-size: 2.5em;
             font-weight: bold;
-            color: #10b981;
+            color: #ffd700; /* Gold color */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
     </style>
 </head>
@@ -427,19 +715,19 @@
         
         <!-- Slide 1: Opening Hook -->
         <div class="slide active">
-            <div class="ai-icon">🤖</div>
+            <div class="ai-icon"><i class="fas fa-robot"></i></div>
             <h1>The AI Revolution is HERE</h1>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
-                <div class="stats">300,000+</div>
-                <p>Tech jobs eliminated by AI in 2023-2024</p>
-                <p>But <span class="highlight">NEW opportunities</span> are emerging for those who are prepared!</p>
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 30px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(255, 215, 0, 0.3);">
+                <div class="stats" style="font-size: 8.5em; color: #ff0000;">300,000+</div>
+                <p style="color: white; font-weight: 800; font-size: 2.5em; border: none; padding: 0; margin: 0 0 20px 0; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);">Tech jobs <span style="color: #ff0000; font-weight: 900;">ELIMINATED BY AI</span> in 2023-2024</p>
+                <p>But <span class="highlight">NEW opportunities</span> are emerging for <span style="color: #38bdf8; font-weight: 700;">those who are prepared!</span></p>
             </div>
         </div>
         
         <!-- Slide 2: The Problem -->
         <div class="slide">
             <h2>The Challenge</h2>
-            <div class="problem-visual" style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
+            <div class="problem-visual" style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <div style="text-align: center;">
                     <div class="icon-large">👨‍💻</div>
                     <p>Fresh Graduates</p>
@@ -450,8 +738,8 @@
                     <p>AI + Senior Engineers</p>
                 </div>
             </div>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px; margin-top: 20px;">
-                <p>Entry-level tasks are now automated</p>
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; margin-top: 20px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                <p><span style="color: #38bdf8; font-weight: 700;">Entry-level tasks</span> are now automated</p>
                 <p>But companies need <span class="highlight">AI-ready engineers</span> for infrastructure roles</p>
             </div>
         </div>
@@ -460,7 +748,7 @@
         <div class="slide">
             <img src="images/logo.jpeg" alt="3dove Logo" class="logo-image" style="max-width: 200px; margin-bottom: 20px; border-radius: 50%;">
             <h1>AI-Powered Linux & Git Training</h1>
-            <p>The <span class="highlight">rock-solid foundation</span> for tomorrow's tech careers</p>
+            <p>The <span class="highlight">rock-solid foundation</span> for <span style="color: #38bdf8; font-weight: 700;">tomorrow's tech careers</span></p>
             <div class="career-grid">
                 <div class="career-card">☁️ Cloud Engineering</div>
                 <div class="career-card">⚙️ DevOps</div>
@@ -472,19 +760,19 @@
         </div>
         
         <!-- Slide 4: Program Features -->
-        <div class="slide" style="background: #0e6cff;">
-            <h2 style="margin-bottom: 10px; color: white;">What Makes Us Different</h2>
+        <div class="slide">
+            <h2 style="margin-bottom: 10px;">What Makes Us Different</h2>
             <div class="program-features">
-                <div class="feature-box" style="background: black;">
+                <div class="feature-box">
                     <h3>🎓 30+ Hours</h3>
                     <p>Expert-led live discussions and server demonstrations with industry professionals</p>
                 </div>
-                <div class="feature-box" style="background: black;">
+                <div class="feature-box">
                     <h3>💻 30+ Hours</h3>
                     <p>Hands-on graded labs on LIVE servers - real cloud infrastructure, not simulations</p>
                 </div>
             </div>
-            <div class="feature-box" style="max-width: 600px; margin: 15px auto 0; background: black;">
+            <div class="feature-box" style="max-width: 600px; margin: 15px auto 0;">
                 <h3>🤖 AI-Enhanced Learning</h3>
                 <p>Personalized guidance, accelerated learning speed, and fluency with modern AI tools</p>
             </div>
@@ -493,25 +781,25 @@
         <!-- Slide 5: Why Linux & Git -->
         <div class="slide">
             <h2>Why Linux & Git?</h2>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <div class="icon-large">🏗️</div>
-                <p>They're the <span class="highlight">backbone</span> of EVERY modern tech infrastructure</p>
-                <div style="display: flex; justify-content: space-around; margin: 40px 0; flex-wrap: wrap;">
+                <p>They're the <span class="highlight">backbone</span> of <span style="color: #38bdf8; font-weight: 700;">EVERY modern tech infrastructure</span></p>
+                <div style="display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; gap: 10px;">
                     <div style="text-align: center; margin: 10px;">
                         <div style="font-size: 2em;">☁️</div>
-                        <p>AWS/Azure/GCP</p>
+                        <p style="color: #38bdf8; font-weight: 700;">AWS/Azure/GCP</p>
                     </div>
                     <div style="text-align: center; margin: 10px;">
                         <div style="font-size: 2em;">🚢</div>
-                        <p>Kubernetes</p>
+                        <p style="color: white;">Kubernetes</p>
                     </div>
                     <div style="text-align: center; margin: 10px;">
                         <div style="font-size: 2em;">🔄</div>
-                        <p>CI/CD Pipelines</p>
+                        <p style="color: #38bdf8; font-weight: 700;">CI/CD Pipelines</p>
                     </div>
                     <div style="text-align: center; margin: 10px;">
                         <div style="font-size: 2em;">🔒</div>
-                        <p>Security Systems</p>
+                        <p style="color: white;">Security Systems</p>
                     </div>
                 </div>
             </div>
@@ -520,13 +808,13 @@
         <!-- Slide 6: Program Structure -->
         <div class="slide">
             <h2>60-Day Structured Program</h2>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-circle">30</div>
                         <h3>Days 1-30</h3>
                         <p>Live Classes & Demos</p>
-                        <p><strong>1 hour/day</strong></p>
+                        <p><strong>Average of 1 hour/day</strong></p>
                         <div class="timeline-line"></div>
                     </div>
                     <div class="timeline-item">
@@ -536,19 +824,19 @@
                         <p><strong>Personal Practice</strong></p>
                     </div>
                 </div>
-                <p>Perfectly manageable alongside your current commitments!</p>
+                <p><span style="color: #38bdf8; font-weight: 700;">Perfectly manageable</span> alongside your current commitments!</p>
             </div>
         </div>
         
         <!-- Slide 7: Prerequisites -->
         <div class="slide">
             <h2>Simple Prerequisites</h2>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <p style="font-size: 1.6em; margin: 10px 0 20px;">
                     <span class="highlight">If you can browse the web, you're ready!</span>
                 </p>
                 <div style="font-size: 6em; margin: 10px 0;">✅</div>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 600px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto;">
                     <div style="text-align: center;">
                         <div style="font-size: 3em;">💻</div>
                         <p>Basic computer skills</p>
@@ -572,14 +860,14 @@
         <!-- Slide 8: Advanced Training Path -->
         <div class="slide">
             <h2>Your Learning Journey Continues</h2>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <div class="success-metrics" style="display: flex; justify-content: center;">
                     <div class="metric-card" style="max-width: 300px;">
                         <div class="metric-number">🚀</div>
                         <p>Advanced Training Path</p>
                     </div>
                 </div>
-                <p>After mastering the fundamentals, join our <span class="highlight">intermediate and advanced courses</span></p>
+                <p><span style="color: #38bdf8; font-weight: 700;">After mastering the fundamentals</span>, join our <span class="highlight">intermediate and advanced courses</span></p>
                 <p>Specialized tracks for Cloud Engineering, DevOps, SysAdmin and other related roles</p>
                 <p>Continue building your skills with our expert-led advanced training programs and Live Projects</p>
             </div>
@@ -588,13 +876,13 @@
         <!-- Slide 9: Pricing -->
         <div class="slide">
             <h2>Incredible Value</h2>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <div class="pricing-box">
                     <div style="font-size: 2.5em; margin-bottom: 15px;">₦49,000</div>
                     <div style="font-size: 1.2em; opacity: 0.8; margin-bottom: 10px;">That's only $30 USD</div>
                     <div>For 60+ Hours of Expert Training</div>
                 </div>
-                <p>We're limiting enrollment to ensure <span class="highlight">personalized attention</span></p>
+                <p><span style="color: #38bdf8; font-weight: 700;">We're limiting enrollment</span> to ensure <span class="highlight">personalized attention</span></p>
                 <p>and quality lab experiences</p>
             </div>
         </div>
@@ -602,35 +890,38 @@
         <!-- Slide 10: Call to Action -->
         <div class="slide">
             <h2>Ready to Future-Proof Your Career?</h2>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px;">
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <div class="contact-info">
                     <div style="margin-bottom: 15px;">
-                        <strong>📱 WhatsApp:</strong> +234-808-508-7464
+                        <strong><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp:</strong> <a href="https://wa.me/qr/KEKJ7BTBGFAUA1" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: bold;">+234-808-508-7464</a>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>📧 Email:</strong> info@3dove.cloud
                     </div>
                     <div>
-                        <strong>📧 Email:</strong> info@3dove.cloud
+                        <strong>🌐 Website:</strong> <a href="https://www.3dove.cloud" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: bold;">www.3dove.cloud</a>
                     </div>
                 </div>
                 <div style="font-size: 1.8em; margin: 30px 0;">
-                    <span class="highlight">Don't let AI replace you</span>
+                    <span style="color: #38bdf8; font-weight: 700;">Don't let</span> <span class="highlight">AI replace you</span>
                 </div>
                 <div style="font-size: 1.6em;">
-                    Learn to work <span class="highlight">WITH IT!</span>
+                    <span style="color: #38bdf8; font-weight: 700;">Learn to work</span> <span class="highlight">WITH IT!</span>
                 </div>
             </div>
         </div>
         
         <!-- Slide 11: Closing -->
         <div class="slide">
-            <img src="images/logo.jpeg" alt="3dove Logo" class="logo-image" style="max-width: 150px; margin-bottom: 20px; border-radius: 50%;">
-            <h1 style="font-size: 1.9em;">Building Tomorrow's AI-Ready Engineers Today</h1>
-            <div style="background: black; padding: 20px; border-radius: 20px; max-width: 800px; margin: 20px 0; font-size: 1.5em;">
-                <p>Message us now to secure your spot</p>
+            <img src="images/logo.jpeg" alt="3dove Logo" class="logo-image" style="max-width: 150px; margin-bottom: 20px; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(14, 108, 255, 0.3);">
+            <h1 style="font-size: 1.9em; background: linear-gradient(to right, #ffffff, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Building Tomorrow's AI-Ready Engineers Today</h1>
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; margin: 20px 0; font-size: 1.5em; border: 1px solid rgba(56, 189, 248, 0.2);">
+                <p><span style="color: #38bdf8; font-weight: 700;">Message us now</span> to secure your spot</p>
                 <p><span class="highlight">Your future in tech starts HERE!</span></p>
                 <div class="contact-info" style="margin-top: 15px; font-size: 0.9em;">
-                    <div>📱 +234-808-508-7464</div>
+                    <div><i class="fab fa-whatsapp" style="color: #25D366;"></i> <a href="https://wa.me/qr/KEKJ7BTBGFAUA1" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: bold;">+234-808-508-7464</a></div>
                     <div>📧 info@3dove.cloud</div>
-                    <div>🌐 www.3dove.cloud</div>
+                    <div>🌐 <a href="https://www.3dove.cloud" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: bold;">www.3dove.cloud</a></div>
                 </div>
             </div>
         </div>
