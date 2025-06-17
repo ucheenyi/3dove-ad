@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>3dove AI-Powered Linux & Git Training</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -27,27 +27,48 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             letter-spacing: 0.3px;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
         }
         
         .slideshow-container {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        :root {
+            --vh: 1vh;
         }
         
         .slide {
             display: none;
             width: 100%;
-            height: 100vh;
+            height: 100vh; /* Fallback */
+            height: calc(var(--vh, 1vh) * 100);
             position: relative;
             background: #0f172a; /* Dark blue background matching 3dove.cloud */
             background-image: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 100%);
             animation: slideIn 0.8s ease-in-out;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-blend-mode: soft-light;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
         
         /* Slide-specific backgrounds */
@@ -120,14 +141,21 @@
         .slide.active {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             text-align: center;
-            padding: 40px 60px 50px 60px; /* Added bottom padding for navigation buttons */
+            padding: 40px 20px 50px 20px; /* Reduced horizontal padding */
             overflow-y: auto;
             max-height: 100vh;
             position: relative;
             z-index: 2;
+        }
+        
+        @media (min-width: 769px) {
+            .slide.active {
+                padding: 40px 60px 50px 60px;
+                justify-content: center;
+            }
         }
         
         .slide::before {
@@ -143,7 +171,11 @@
         
         @media (max-width: 768px) {
             .slide.active {
-                padding: 20px 20px 40px 20px; /* Added extra bottom padding for mobile */
+                padding: 20px 15px 40px 15px; /* Reduced horizontal padding further */
+            }
+            
+            body {
+                overflow: auto; /* Allow body scrolling on mobile */
             }
         }
         
@@ -224,39 +256,104 @@
         @media (max-width: 768px) {
             .slide h1 {
                 font-size: 2.2em;
+                margin-bottom: 15px;
             }
             
             .slide h2 {
                 font-size: 2em;
+                margin-bottom: 15px;
             }
             
             .slide h3 {
                 font-size: 1.6em;
+                margin-bottom: 10px;
             }
             
             .slide p {
-                font-size: 1.2em;
+                font-size: 1.3em;
                 max-width: 100%;
-                padding-left: 10px;
+                padding-left: 8px;
                 margin-left: 5px;
+                margin-bottom: 12px;
+                border-left: 2px solid rgba(255, 215, 0, 0.3);
             }
             
             .stats {
-                font-size: 5em !important;
+                font-size: 4.5em !important;
+                margin: 15px 0;
             }
             
             .icon-large {
-                font-size: 3em;
-                margin: 10px;
+                font-size: 2.5em;
+                margin: 8px;
             }
             
             .vs-text {
-                font-size: 2em;
+                font-size: 1.8em;
             }
             
             .contact-info {
                 font-size: 1.2em;
+                padding: 12px;
+            }
+            
+            .career-card {
                 padding: 15px;
+                font-size: 1.2em;
+            }
+            
+            .feature-box {
+                padding: 15px;
+            }
+            
+            .pricing-box {
+                padding: 20px;
+            }
+            
+            .timeline-circle {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+            
+            [style*="font-size: 6em"] {
+                font-size: 4em !important;
+            }
+            
+            [style*="font-size: 3em"] {
+                font-size: 2.2em !important;
+            }
+            
+            [style*="font-size: 2.5em"] {
+                font-size: 2em !important;
+            }
+            
+            [style*="font-size: 1.8em"] {
+                font-size: 1.5em !important;
+            }
+            
+            [style*="font-size: 1.6em"] {
+                font-size: 1.4em !important;
+            }
+            
+            .slide > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box;
+            }
+            
+            /* Specific fix for slide 3 */
+            .slide:nth-child(3) h1 {
+                font-size: 2.4em;
+            }
+            
+            .slide:nth-child(3) p {
+                font-size: 1.5em;
+            }
+            
+            .slide:nth-child(3) .career-grid {
+                gap: 10px;
+                margin-top: 20px;
             }
         }
         
@@ -336,34 +433,119 @@
         @media (max-width: 480px) {
             .career-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 10px;
             }
             
             .slide h1 {
                 font-size: 1.8em;
+                margin-bottom: 12px;
             }
             
             .slide h2 {
                 font-size: 1.6em;
+                margin-bottom: 12px;
+            }
+            
+            .slide h3 {
+                font-size: 1.4em;
             }
             
             .slide p {
-                font-size: 1.1em;
+                font-size: 1.2em;
                 border-left: 2px solid rgba(255, 215, 0, 0.3);
-                padding-left: 8px;
+                padding-left: 6px;
                 margin-left: 3px;
+                margin-bottom: 10px;
+                line-height: 1.4;
             }
             
             .stats {
-                font-size: 4em !important;
-                margin: 15px 0;
+                font-size: 3.5em !important;
+                margin: 10px 0;
             }
             
             .slide-counter {
-                top: 15px;
-                right: 15px;
-                padding: 5px 10px;
-                font-size: 0.9em;
+                top: 10px;
+                right: 10px;
+                padding: 4px 8px;
+                font-size: 0.8em;
+            }
+            
+            .program-features {
+                gap: 10px;
+            }
+            
+            .feature-box {
+                padding: 12px;
+            }
+            
+            .career-card {
+                padding: 12px;
+                font-size: 1.1em;
+            }
+            
+            .contact-info {
+                font-size: 1em;
+                padding: 10px;
+            }
+            
+            .timeline-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3em;
+            }
+            
+            [style*="font-size: 6em"] {
+                font-size: 3.5em !important;
+            }
+            
+            [style*="font-size: 3em"] {
+                font-size: 2.2em !important;
+            }
+            
+            [style*="font-size: 2.5em"] {
+                font-size: 2em !important;
+            }
+            
+            [style*="font-size: 1.8em"] {
+                font-size: 1.5em !important;
+            }
+            
+            [style*="font-size: 1.6em"] {
+                font-size: 1.4em !important;
+            }
+            
+            [style*="font-size: 1.5em"] {
+                font-size: 1.3em !important;
+            }
+            
+            .slide.active {
+                padding: 15px 15px 35px 15px;
+            }
+            
+            .slide > div {
+                padding: 15px !important;
+            }
+            
+            /* Specific fix for slide 3 */
+            .slide:nth-child(3) .career-grid {
+                gap: 8px;
+            }
+            
+            .slide:nth-child(3) .career-card {
+                padding: 10px;
+                font-size: 1.2em;
+                margin-bottom: 5px;
+            }
+            
+            .slide:nth-child(3) h1[style*="font-size: 3em"] {
+                font-size: 2.2em !important;
+                margin-bottom: 10px;
+            }
+            
+            .slide:nth-child(3) p[style*="font-size: 2em"] {
+                font-size: 1.6em !important;
+                margin-bottom: 15px;
             }
         }
         
@@ -756,16 +938,16 @@
         
         <!-- Slide 3: Solution Introduction -->
         <div class="slide">
-            <img src="images/logo.jpeg" alt="3dove Logo" class="logo-image" style="max-width: 200px; margin-bottom: 20px; border-radius: 50%;">
-            <h1>AI-Powered Linux & Git Training</h1>
-            <p>The <span class="highlight">rock-solid foundation</span> for <span style="color: #38bdf8; font-weight: 700;">tomorrow's tech careers</span></p>
-            <div class="career-grid">
-                <div class="career-card">☁️ Cloud Engineering</div>
-                <div class="career-card">⚙️ DevOps</div>
-                <div class="career-card">🖥️ System Admin</div>
-                <div class="career-card">🔒 Cybersecurity</div>
-                <div class="career-card">🛠️ SRE</div>
-                <div class="career-card">🏗️ Platform Engineering</div>
+            <img src="images/logo.jpeg" alt="3dove Logo" class="logo-image" style="max-width: 150px; margin-bottom: 15px; border-radius: 50%;">
+            <h1 style="font-size: 3em; margin-bottom: 15px;">AI-Powered Linux & Git Training</h1>
+            <p style="font-size: 2em; margin-bottom: 20px;">The <span class="highlight">rock-solid foundation</span> for <span style="color: #38bdf8; font-weight: 700;">tomorrow's tech careers</span></p>
+            <div class="career-grid" style="gap: 12px; margin: 15px 0;">
+                <div class="career-card" style="padding: 15px; font-size: 1.3em;">☁️ Cloud Engineering</div>
+                <div class="career-card" style="padding: 15px; font-size: 1.3em;">⚙️ DevOps</div>
+                <div class="career-card" style="padding: 15px; font-size: 1.3em;">🖥️ System Admin</div>
+                <div class="career-card" style="padding: 15px; font-size: 1.3em;">🔒 Cybersecurity</div>
+                <div class="career-card" style="padding: 15px; font-size: 1.3em;">🛠️ SRE</div>
+                <div class="career-card" style="padding: 15px; font-size: 1.3em;">🏗️ Platform Engineering</div>
             </div>
         </div>
         
@@ -964,6 +1146,9 @@
             currentSlide = (n + totalSlides) % totalSlides;
             slides[currentSlide].classList.add('active');
             document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Scroll to top of new slide
+            slides[currentSlide].scrollTop = 0;
         }
         
         function nextSlide() {
@@ -988,6 +1173,43 @@
                 autoPlayBtn.style.background = '#ef4444';
             }
         }
+        
+        // Handle touch events for swiping
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                // Swipe left
+                nextSlide();
+            } else if (touchEndX > touchStartX + 50) {
+                // Swipe right
+                prevSlide();
+            }
+        }
+        
+        // Fix viewport height for mobile browsers
+        function setViewportHeight() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.style.height = `calc(100 * var(--vh))`;
+            });
+        }
+        
+        window.addEventListener('resize', setViewportHeight);
+        window.addEventListener('orientationchange', setViewportHeight);
+        setViewportHeight();
     </script>
 </body>
 </html>
