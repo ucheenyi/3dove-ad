@@ -123,7 +123,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 60px;
+            padding: 40px 60px 50px 60px; /* Added bottom padding for navigation buttons */
             overflow-y: auto;
             max-height: 100vh;
             position: relative;
@@ -143,7 +143,7 @@
         
         @media (max-width: 768px) {
             .slide.active {
-                padding: 20px;
+                padding: 20px 20px 40px 20px; /* Added extra bottom padding for mobile */
             }
         }
         
@@ -555,46 +555,56 @@
         
         .navigation {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 10px;
+            left: 0;
+            right: 0;
             display: flex;
-            gap: 8px;
+            justify-content: space-between;
+            padding: 0 10px;
             z-index: 1000;
-            flex-direction: column;
-            align-items: flex-end;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
         
         .nav-btn {
-            padding: 8px 15px;
+            padding: 5px 10px;
             background: linear-gradient(45deg, #ffd700, #f5a623);
             color: #0f172a;
             border: none;
-            border-radius: 6px; /* Sharper corners like 3dove.cloud */
+            border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.8em;
+            font-size: 0.7em;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 0 10px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 0 5px rgba(255, 215, 0, 0.2);
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            opacity: 0.7;
+            opacity: 0.6;
         }
         
         .nav-btn:hover {
             opacity: 1;
         }
         
+        .nav-btn.prev {
+            margin-right: auto;
+        }
+        
+        .nav-btn.next {
+            margin-left: auto;
+        }
+        
         @media (max-width: 768px) {
             .navigation {
-                bottom: 10px;
-                right: 10px;
-                gap: 5px;
+                bottom: 5px;
+                padding: 0 5px;
             }
             
             .nav-btn {
-                padding: 6px 12px;
-                font-size: 0.7em;
+                padding: 4px 8px;
+                font-size: 0.6em;
             }
         }
         
@@ -932,9 +942,9 @@
     </div>
     
     <div class="navigation">
-        <button class="nav-btn" onclick="prevSlide()">← Previous</button>
-        <button class="nav-btn" onclick="nextSlide()">Next →</button>
-        <button class="nav-btn" onclick="autoPlay()">Auto Play</button>
+        <button class="nav-btn prev" onclick="prevSlide()">←</button>
+        <button class="nav-btn auto" onclick="autoPlay()">Play</button>
+        <button class="nav-btn next" onclick="nextSlide()">→</button>
     </div>
     
     <script>
@@ -965,16 +975,16 @@
         }
         
         function autoPlay() {
-            const autoPlayBtn = document.querySelector('.nav-btn:last-child');
+            const autoPlayBtn = document.querySelector('.nav-btn.auto');
             
             if (autoPlayInterval) {
                 clearInterval(autoPlayInterval);
                 autoPlayInterval = null;
-                autoPlayBtn.textContent = 'Auto Play';
-                autoPlayBtn.style.background = 'rgba(251, 191, 36, 0.9)';
+                autoPlayBtn.textContent = 'Play';
+                autoPlayBtn.style.background = 'linear-gradient(45deg, #ffd700, #f5a623)';
             } else {
-                autoPlayInterval = setInterval(nextSlide, 4000);
-                autoPlayBtn.textContent = 'Stop Auto Play';
+                autoPlayInterval = setInterval(nextSlide, 5000);
+                autoPlayBtn.textContent = 'Stop';
                 autoPlayBtn.style.background = '#ef4444';
             }
         }
