@@ -144,7 +144,7 @@
             justify-content: flex-start;
             align-items: center;
             text-align: center;
-            padding: 40px 20px 50px 20px; /* Reduced horizontal padding */
+            padding: 40px 20px 70px 20px; /* Increased bottom padding */
             overflow-y: auto;
             max-height: 100vh;
             position: relative;
@@ -171,11 +171,21 @@
         
         @media (max-width: 768px) {
             .slide.active {
-                padding: 20px 15px 40px 15px; /* Reduced horizontal padding further */
+                padding: 20px 15px 70px 15px; /* Increased bottom padding */
             }
             
             body {
                 overflow: auto; /* Allow body scrolling on mobile */
+            }
+            
+            /* Fix for slide counter */
+            .slide-counter {
+                z-index: 1001;
+            }
+            
+            /* Fix for slide 4 */
+            .slide:nth-child(4) {
+                padding-bottom: 80px;
             }
         }
         
@@ -520,7 +530,7 @@
             }
             
             .slide.active {
-                padding: 15px 15px 35px 15px;
+                padding: 15px 15px 50px 15px;
             }
             
             .slide > div {
@@ -546,6 +556,34 @@
             .slide:nth-child(3) p[style*="font-size: 2em"] {
                 font-size: 1.6em !important;
                 margin-bottom: 15px;
+            }
+            
+            /* Specific fix for slide 4 */
+            .slide:nth-child(4) .feature-box {
+                padding: 10px;
+                margin-bottom: 10px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .slide:nth-child(4) .feature-box:last-child {
+                margin-bottom: 40px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .slide:nth-child(4) h3 {
+                font-size: 1.3em;
+                margin-bottom: 8px;
+            }
+            
+            .slide:nth-child(4) p {
+                font-size: 1.1em;
+            }
+            
+            .slide:nth-child(4) .program-features {
+                width: 100%;
+                max-width: 100%;
             }
         }
         
@@ -599,7 +637,7 @@
             gap: 20px;
             margin: 15px 0;
             width: 100%;
-            max-width: 900px;
+            max-width: 100%;
         }
         
         @media (max-width: 768px) {
@@ -742,28 +780,31 @@
             right: 0;
             display: flex;
             justify-content: space-between;
-            padding: 0 10px;
             z-index: 1000;
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(5px);
+            padding: 5px 15px;
         }
         
         .nav-btn {
-            padding: 5px 10px;
+            padding: 4px 8px;
             background: linear-gradient(45deg, #ffd700, #f5a623);
             color: #0f172a;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.7em;
+            font-size: 0.65em;
             transition: all 0.3s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 0 5px rgba(255, 215, 0, 0.2);
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             opacity: 0.6;
+            min-width: 30px;
         }
         
         .nav-btn:hover {
@@ -774,6 +815,10 @@
             margin-right: auto;
         }
         
+        .nav-btn.auto {
+            margin: 0 5px;
+        }
+        
         .nav-btn.next {
             margin-left: auto;
         }
@@ -781,12 +826,13 @@
         @media (max-width: 768px) {
             .navigation {
                 bottom: 5px;
-                padding: 0 5px;
+                padding: 3px 10px;
             }
             
             .nav-btn {
-                padding: 4px 8px;
-                font-size: 0.6em;
+                padding: 3px 6px;
+                font-size: 0.55em;
+                min-width: 25px;
             }
         }
         
@@ -954,19 +1000,19 @@
         <!-- Slide 4: Program Features -->
         <div class="slide">
             <h2 style="margin-bottom: 10px;">What Makes Us Different</h2>
-            <div class="program-features">
-                <div class="feature-box">
+            <div class="program-features" style="margin-bottom: 15px; width: 100%;">
+                <div class="feature-box" style="padding: 15px;">
                     <h3>🎓 30+ Hours</h3>
-                    <p>Expert-led live discussions and server demonstrations with industry professionals</p>
+                    <p style="font-size: 1.2em;">Expert-led live discussions and server demonstrations with industry professionals</p>
                 </div>
-                <div class="feature-box">
+                <div class="feature-box" style="padding: 15px;">
                     <h3>💻 30+ Hours</h3>
-                    <p>Hands-on graded labs on LIVE servers - real cloud infrastructure, not simulations</p>
+                    <p style="font-size: 1.2em;">Hands-on graded labs on LIVE servers - real cloud infrastructure, not simulations</p>
                 </div>
             </div>
-            <div class="feature-box" style="max-width: 600px; margin: 15px auto 0;">
+            <div class="feature-box" style="width: 100%; max-width: 100%; margin: 0 0 50px 0; padding: 15px;">
                 <h3>🤖 AI-Enhanced Learning</h3>
-                <p>Personalized guidance, accelerated learning speed, and fluency with modern AI tools</p>
+                <p style="font-size: 1.2em;">Personalized guidance, accelerated learning speed, and fluency with modern AI tools</p>
             </div>
         </div>
         
