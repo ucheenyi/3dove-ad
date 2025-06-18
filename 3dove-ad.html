@@ -813,21 +813,21 @@
         }
         
         .nav-btn {
-            padding: 4px 8px;
+            padding: 6px 12px;
             background: linear-gradient(45deg, #ffd700, #f5a623);
             color: #0f172a;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.65em;
+            font-size: 0.75em;
             transition: all 0.3s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 0 5px rgba(255, 215, 0, 0.2);
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            opacity: 0.6;
-            min-width: 30px;
+            opacity: 0.8;
+            min-width: 40px;
         }
         
         .nav-btn:hover {
@@ -839,29 +839,30 @@
         }
         
         .nav-btn.auto {
-            margin: 0 5px;
+            margin: 0 15px 0 5px;
         }
         
         .nav-btn.next {
             margin-left: auto;
         }
         
-        .nav-btn.sound {
-            background: linear-gradient(45deg, #38bdf8, #0284c7);
+        .nav-btn.audio {
+            background: linear-gradient(45deg, #8b5cf6, #6366f1);
             opacity: 0.8;
-            margin-right: 5px;
+            margin-right: 15px;
+            margin-left: 10px;
         }
         
         @media (max-width: 768px) {
             .navigation {
                 bottom: 5px;
-                padding: 3px 10px;
+                padding: 5px 10px;
             }
             
             .nav-btn {
-                padding: 3px 6px;
-                font-size: 0.55em;
-                min-width: 25px;
+                padding: 5px 8px;
+                font-size: 0.65em;
+                min-width: 35px;
             }
         }
         
@@ -1009,7 +1010,7 @@
             </div>
             <div style="background: rgba(15, 23, 42, 0.8); padding: 20px; border-radius: 8px; max-width: 800px; margin-top: 20px; border: 1px solid rgba(56, 189, 248, 0.2);">
                 <p><span style="color: #38bdf8; font-weight: 700;">Entry-level tasks</span> are now automated</p>
-                <p>But companies need <span class="highlight">AI-ready engineers</span> for infrastructure roles</p>
+                <p>But companies need <span class="highlight">AI-ready engineers</span> for strategic implementation roles</p>
             </div>
         </div>
         
@@ -1038,7 +1039,7 @@
                 </div>
                 <div class="feature-box" style="padding: 15px;">
                     <h3>💻 30+ Hours</h3>
-                    <p style="font-size: 1.2em;">Hands-on graded labs on LIVE servers - real cloud infrastructure, not simulations</p>
+                    <p style="font-size: 1.2em;">Hands-on graded labs on LIVE servers</p>
                 </div>
             </div>
             <div class="feature-box" style="max-width: 600px; margin: 5px auto 50px auto; padding: 15px;">
@@ -1203,7 +1204,7 @@
     <div class="navigation">
         <button class="nav-btn prev" onclick="prevSlide()">←</button>
         <button class="nav-btn auto" onclick="autoPlay()">Play</button>
-        <button class="nav-btn sound" onclick="toggleSound()">🔇</button>
+        <button class="nav-btn audio" onclick="toggleAudio()">🎧</button>
         <button class="nav-btn next" onclick="nextSlide()">→</button>
     </div>
     
@@ -1224,6 +1225,200 @@
         // Make first slide active
         slides[0].classList.add('active');
         
+        // Initialize voices for speech synthesis
+        function initVoices() {
+            if (typeof speechSynthesis !== 'undefined') {
+                speechSynthesis.onvoiceschanged = function() {
+                    // Voices are now loaded
+                };
+                speechSynthesis.getVoices();
+            }
+        }
+        
+        // Initialize voices
+        initVoices();
+        
+        // Audio functionality (combines music and voice narration)
+        const bgMusic = document.getElementById('bgMusic');
+        let isMuted = true;
+        let voiceEnabled = false;
+        let speaking = false;
+        let speechSynth = window.speechSynthesis;
+        let audioMode = 3; // 0: all off, 1: music only, 2: voice only, 3: both (default)
+        
+        // Initialize audio button on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.nav-btn.audio').textContent = '🎧';
+        });
+        
+        function toggleAudio(forceMode) {
+            const audioBtn = document.querySelector('.nav-btn.audio');
+            
+            // If a specific mode is requested, use it; otherwise cycle through modes
+            if (forceMode !== undefined) {
+                audioMode = forceMode;
+            } else {
+                // Start with both (3) and cycle through modes
+                // Order: 3 (both) -> 0 (off) -> 1 (music) -> 2 (voice) -> 3 (both)
+                audioMode = (audioMode + 1) % 4;
+                
+                // If we're at 0 and coming from 3, go directly to 1 to skip "off" state
+                // This makes "both" the default/first option when clicking
+                if (audioMode === 0) {
+                    audioMode = 1; // Skip to music only
+                }
+            }
+            
+            switch(audioMode) {
+                case 0: // All off
+                    // Stop music
+                    bgMusic.pause();
+                    isMuted = true;
+                    
+                    // Stop voice
+                    if (speaking) {
+                        speechSynth.cancel();
+                        speaking = false;
+                    }
+                    voiceEnabled = false;
+                    
+                    audioBtn.textContent = '🔇';
+                    break;
+                    
+                case 1: // Music only
+                    // Start music
+                    bgMusic.load();
+                    bgMusic.volume = 0.5;
+                    bgMusic.play().catch(e => {
+                        console.log('Audio play failed:', e);
+                        audioMode = 0; // Reset to off if failed
+                        audioBtn.textContent = '🔇';
+                        return;
+                    });
+                    isMuted = false;
+                    
+                    // Ensure voice is off
+                    if (speaking) {
+                        speechSynth.cancel();
+                        speaking = false;
+                    }
+                    voiceEnabled = false;
+                    
+                    audioBtn.textContent = '🎵';
+                    break;
+                    
+                case 2: // Voice only
+                    // Stop music
+                    bgMusic.pause();
+                    isMuted = true;
+                    
+                    // Start voice
+                    voiceEnabled = true;
+                    speakSlideContent(currentSlide);
+                    
+                    audioBtn.textContent = '🗣️';
+                    break;
+                    
+                case 3: // Both music and voice
+                    // Start music
+                    bgMusic.load();
+                    bgMusic.volume = 0.3; // Lower volume when both are active
+                    bgMusic.play().catch(e => {
+                        console.log('Audio play failed:', e);
+                        // Fall back to voice only
+                        audioMode = 2;
+                        audioBtn.textContent = '🗣️';
+                        voiceEnabled = true;
+                        speakSlideContent(currentSlide);
+                        return;
+                    });
+                    isMuted = false;
+                    
+                    // Start voice
+                    voiceEnabled = true;
+                    speakSlideContent(currentSlide);
+                    
+                    audioBtn.textContent = '🎧';
+                    break;
+            }
+        }
+        
+        function speakSlideContent(slideIndex) {
+            // Stop any currently playing voice
+            if (speaking) {
+                speechSynth.cancel();
+                speaking = false;
+            }
+            
+            // Only speak if voice is enabled
+            if (voiceEnabled) {
+                // Lower background music if it's playing and both are enabled
+                if (!isMuted && audioMode === 3) {
+                    bgMusic.volume = 0.1;
+                }
+                
+                // Get the slide content to speak
+                const slide = slides[slideIndex];
+                let textToSpeak = '';
+                
+                // Get the heading
+                const heading = slide.querySelector('h1, h2');
+                if (heading) {
+                    textToSpeak += heading.textContent + '. ';
+                }
+                
+                // Get paragraphs and other text content
+                const paragraphs = slide.querySelectorAll('p');
+                paragraphs.forEach(p => {
+                    textToSpeak += p.textContent + '. ';
+                });
+                
+                // Create speech utterance
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.rate = 0.85; // Slower than default for more professional delivery
+                utterance.pitch = 0.9; // Slightly lower pitch for more authoritative tone
+                utterance.volume = 1;
+                
+                // Get available voices and set a professional voice
+                let voices = speechSynth.getVoices();
+                if (voices.length > 0) {
+                    // Try to find a professional male voice first (typically more authoritative)
+                    let voice = voices.find(v => v.name.includes('Daniel') || v.name.includes('David')) || 
+                               voices.find(v => v.name.includes('Google') && v.name.includes('Male') && v.lang.includes('en')) ||
+                               voices.find(v => v.name.includes('Microsoft') && v.name.includes('Male') && v.lang.includes('en')) ||
+                               voices.find(v => v.lang.includes('en-GB')) || // British accent often sounds more professional
+                               voices.find(v => v.lang.includes('en-US')) || 
+                               voices[0];
+                    utterance.voice = voice;
+                }
+                
+                // Handle speech end
+                utterance.onend = function() {
+                    speaking = false;
+                    
+                    // Restore background music volume if both are enabled
+                    if (!isMuted && audioMode === 3) {
+                        bgMusic.volume = 0.3;
+                    }
+                    
+                    // If in autoplay mode, advance to next slide
+                    if (autoPlayInterval && !speaking) {
+                        // Add a small delay after speech ends before advancing
+                        setTimeout(() => {
+                            if (autoPlayInterval) {
+                                // Still in autoplay mode
+                                advanceSlide();
+                            }
+                        }, 1500); // 1.5 second pause after speech ends
+                    }
+                };
+                
+                // Speak the text
+                speaking = true;
+                speechSynth.speak(utterance);
+            }
+        }
+        
         function showSlide(n) {
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + totalSlides) % totalSlides;
@@ -1232,38 +1427,39 @@
             
             // Scroll to top of new slide
             slides[currentSlide].scrollTop = 0;
+            
+            // Play voice narration for the new slide if enabled
+            if (voiceEnabled) {
+                speakSlideContent(currentSlide);
+            }
         }
         
         function nextSlide() {
+            // If currently speaking, stop it before changing slides
+            if (speaking) {
+                speechSynth.cancel();
+                speaking = false;
+            }
             showSlide(currentSlide + 1);
         }
         
         function prevSlide() {
+            // If currently speaking, stop it before changing slides
+            if (speaking) {
+                speechSynth.cancel();
+                speaking = false;
+            }
             showSlide(currentSlide - 1);
         }
         
-        // Background music functionality
-        const bgMusic = document.getElementById('bgMusic');
-        let isMuted = true;
-        
-        function toggleSound() {
-            const soundBtn = document.querySelector('.nav-btn.sound');
-            if (isMuted) {
-                // Load the audio file first
-                bgMusic.load();
-                // Set volume
-                bgMusic.volume = 0.5;
-                // Try to play
-                bgMusic.play().catch(e => {
-                    console.log('Audio play failed:', e);
-                    alert('Audio playback failed. Please ensure your browser allows audio playback.');
-                });
-                soundBtn.textContent = '🔊';
-                isMuted = false;
+        // Function to advance to next slide with voice narration consideration
+        function advanceSlide() {
+            // If voice is enabled and speaking, don't advance yet
+            if (voiceEnabled && speaking) {
+                // Check again in 1 second
+                setTimeout(advanceSlide, 1000);
             } else {
-                bgMusic.pause();
-                soundBtn.textContent = '🔇';
-                isMuted = true;
+                nextSlide();
             }
         }
         
@@ -1276,26 +1472,37 @@
                 autoPlayBtn.textContent = 'Play';
                 autoPlayBtn.style.background = 'linear-gradient(45deg, #ffd700, #f5a623)';
                 
-                // Pause music when slideshow stops
+                // Pause any audio when slideshow stops
                 if (!isMuted) {
                     bgMusic.pause();
-                    document.querySelector('.nav-btn.sound').textContent = '🔇';
                     isMuted = true;
                 }
+                
+                if (speaking) {
+                    speechSynth.cancel();
+                    speaking = false;
+                }
+                
+                voiceEnabled = false;
             } else {
-                autoPlayInterval = setInterval(nextSlide, 5000);
+                // Start both music and voice narration
+                toggleAudio(3); // Force mode 3 (both music and voice)
+                
+                // Use setTimeout instead of setInterval for dynamic timing
+                function scheduleNextSlide() {
+                    setTimeout(() => {
+                        advanceSlide();
+                        if (autoPlayInterval) { // Only schedule next if still in autoplay mode
+                            scheduleNextSlide();
+                        }
+                    }, voiceEnabled ? 1000 : 5000); // Check every second if voice enabled, otherwise use 5 seconds
+                }
+                
+                autoPlayInterval = true; // Just use as a flag
+                scheduleNextSlide();
+                
                 autoPlayBtn.textContent = 'Stop';
                 autoPlayBtn.style.background = '#ef4444';
-                
-                // Offer to play music when slideshow starts
-                if (isMuted) {
-                    // Modern browsers require user interaction before playing audio
-                    // So we don't auto-play, but we can prompt the user
-                    document.querySelector('.nav-btn.sound').style.animation = 'pulse 1s infinite';
-                    setTimeout(() => {
-                        document.querySelector('.nav-btn.sound').style.animation = '';
-                    }, 3000);
-                }
             }
         }
         
