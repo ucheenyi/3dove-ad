@@ -185,7 +185,31 @@
             
             /* Fix for slide 4 */
             .slide:nth-child(4) {
-                padding-bottom: 80px;
+                padding-bottom: 100px;
+            }
+            
+            /* Make feature boxes full width on mobile */
+            .slide:nth-child(4) .feature-box {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                padding: 15px 10px;
+            }
+            
+            /* Fix for AI-Enhanced Learning box */
+            .slide:nth-child(4) .feature-box:last-child {
+                padding: 10px;
+                margin-top: 0;
+            }
+            
+            .slide:nth-child(4) .feature-box:last-child p {
+                display: block;
+                width: 100%;
+                border: none;
+                padding: 0;
+                margin: 0;
+                text-align: center;
+                white-space: normal;
             }
         }
         
@@ -475,10 +499,10 @@
             }
             
             .slide-counter {
-                top: 10px;
-                right: 10px;
-                padding: 4px 8px;
-                font-size: 0.8em;
+                top: 2px;
+                right: 2px;
+                padding: 2px 6px;
+                font-size: 0.7em;
             }
             
             .program-features {
@@ -561,29 +585,28 @@
             /* Specific fix for slide 4 */
             .slide:nth-child(4) .feature-box {
                 padding: 10px;
-                margin-bottom: 10px;
-                width: 100%;
-                max-width: 100%;
+                margin-bottom: 5px;
             }
             
             .slide:nth-child(4) .feature-box:last-child {
                 margin-bottom: 40px;
-                width: 100%;
                 max-width: 100%;
+                width: 100%;
             }
             
             .slide:nth-child(4) h3 {
                 font-size: 1.3em;
-                margin-bottom: 8px;
+                margin-bottom: 5px;
             }
             
             .slide:nth-child(4) p {
                 font-size: 1.1em;
-            }
-            
-            .slide:nth-child(4) .program-features {
+                border: none;
+                padding-left: 0;
+                margin-left: 0;
                 width: 100%;
-                max-width: 100%;
+                display: inline-block;
+                text-align: center;
             }
         }
         
@@ -634,10 +657,10 @@
         .program-features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 15px 0;
+            gap: 10px;
+            margin: 10px 0;
             width: 100%;
-            max-width: 100%;
+            max-width: 900px;
         }
         
         @media (max-width: 768px) {
@@ -823,6 +846,12 @@
             margin-left: auto;
         }
         
+        .nav-btn.sound {
+            background: linear-gradient(45deg, #38bdf8, #0284c7);
+            opacity: 0.8;
+            margin-right: 5px;
+        }
+        
         @media (max-width: 768px) {
             .navigation {
                 bottom: 5px;
@@ -844,18 +873,20 @@
         
         .slide-counter {
             position: fixed;
-            top: 30px;
-            right: 30px;
+            top: 5px;
+            right: 5px;
             background: rgba(15, 23, 42, 0.7); /* Dark blue matching 3dove.cloud */
-            padding: 8px 16px;
-            border-radius: 6px; /* Sharper corners like 3dove.cloud */
+            padding: 4px 8px;
+            border-radius: 4px; /* Sharper corners like 3dove.cloud */
             backdrop-filter: blur(10px);
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             letter-spacing: 1px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
             border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
             color: #ffd700; /* Gold text */
+            font-size: 0.8em;
+            z-index: 1002;
         }
         
         .background-pattern {
@@ -1000,7 +1031,7 @@
         <!-- Slide 4: Program Features -->
         <div class="slide">
             <h2 style="margin-bottom: 10px;">What Makes Us Different</h2>
-            <div class="program-features" style="margin-bottom: 15px; width: 100%;">
+            <div class="program-features" style="margin-bottom: 5px; max-width: 900px;">
                 <div class="feature-box" style="padding: 15px;">
                     <h3>🎓 30+ Hours</h3>
                     <p style="font-size: 1.2em;">Expert-led live discussions and server demonstrations with industry professionals</p>
@@ -1010,9 +1041,9 @@
                     <p style="font-size: 1.2em;">Hands-on graded labs on LIVE servers - real cloud infrastructure, not simulations</p>
                 </div>
             </div>
-            <div class="feature-box" style="width: 100%; max-width: 100%; margin: 0 0 50px 0; padding: 15px;">
+            <div class="feature-box" style="max-width: 600px; margin: 5px auto 50px auto; padding: 15px;">
                 <h3>🤖 AI-Enhanced Learning</h3>
-                <p style="font-size: 1.2em;">Personalized guidance, accelerated learning speed, and fluency with modern AI tools</p>
+                <p style="font-size: 1.2em; border: none; display: inline-block; width: 100%;">Personalized guidance, accelerated learning speed, and fluency with modern AI tools</p>
             </div>
         </div>
         
@@ -1172,8 +1203,14 @@
     <div class="navigation">
         <button class="nav-btn prev" onclick="prevSlide()">←</button>
         <button class="nav-btn auto" onclick="autoPlay()">Play</button>
+        <button class="nav-btn sound" onclick="toggleSound()">🔇</button>
         <button class="nav-btn next" onclick="nextSlide()">→</button>
     </div>
+    
+    <!-- Hidden audio element -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
     
     <script>
         // Basic slideshow functionality
@@ -1205,6 +1242,31 @@
             showSlide(currentSlide - 1);
         }
         
+        // Background music functionality
+        const bgMusic = document.getElementById('bgMusic');
+        let isMuted = true;
+        
+        function toggleSound() {
+            const soundBtn = document.querySelector('.nav-btn.sound');
+            if (isMuted) {
+                // Load the audio file first
+                bgMusic.load();
+                // Set volume
+                bgMusic.volume = 0.5;
+                // Try to play
+                bgMusic.play().catch(e => {
+                    console.log('Audio play failed:', e);
+                    alert('Audio playback failed. Please ensure your browser allows audio playback.');
+                });
+                soundBtn.textContent = '🔊';
+                isMuted = false;
+            } else {
+                bgMusic.pause();
+                soundBtn.textContent = '🔇';
+                isMuted = true;
+            }
+        }
+        
         function autoPlay() {
             const autoPlayBtn = document.querySelector('.nav-btn.auto');
             
@@ -1213,10 +1275,27 @@
                 autoPlayInterval = null;
                 autoPlayBtn.textContent = 'Play';
                 autoPlayBtn.style.background = 'linear-gradient(45deg, #ffd700, #f5a623)';
+                
+                // Pause music when slideshow stops
+                if (!isMuted) {
+                    bgMusic.pause();
+                    document.querySelector('.nav-btn.sound').textContent = '🔇';
+                    isMuted = true;
+                }
             } else {
                 autoPlayInterval = setInterval(nextSlide, 5000);
                 autoPlayBtn.textContent = 'Stop';
                 autoPlayBtn.style.background = '#ef4444';
+                
+                // Offer to play music when slideshow starts
+                if (isMuted) {
+                    // Modern browsers require user interaction before playing audio
+                    // So we don't auto-play, but we can prompt the user
+                    document.querySelector('.nav-btn.sound').style.animation = 'pulse 1s infinite';
+                    setTimeout(() => {
+                        document.querySelector('.nav-btn.sound').style.animation = '';
+                    }, 3000);
+                }
             }
         }
         
